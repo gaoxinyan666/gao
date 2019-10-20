@@ -1,17 +1,22 @@
-class Animal {
-        public Animal() {
-		System.out.println("我是一只动物");
-	}
-        public Animal(String name) {
-		System.out.println("我是一只" + name);
-	}
+public class Example05{
+   public static void main(String[] args){
+      Taxi t=new Taxi();
+      new Thread(t,"出租车1").start();
+      new Thread(t,"出租车2").start();
+      new Thread(t,"出租车3").start();
+      new Thread(t,"出租车4").start();
+      new Thread(t,"出租车5").start();
+   }
 }
-class Dog extends Animal {
-        public Dog() {
-        }
-}
-public class Example05 {
-	public static void main(String[] args) {
-		Dog dog = new Dog();
-	}
-}
+class Taxi implements Runnable{
+   private int passengers=100;
+   public void run(){
+      while (true) {
+         if (passengers>0){
+            Thread th=Thread.currentThread();
+            String th_name=th.getName();
+            System.out.println(th_name+"第"+passengers--+"客人上车");    
+         }
+      }
+   }
+} 
